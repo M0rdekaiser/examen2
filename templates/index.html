@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}">
+    <title>Gestión de productos</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Gestión de productos</h1>
+        <a href="{{ url_for('nuevo_producto') }}">Nuevo producto</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Descripción</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Categoría</th>
+                    <th>Fecha de Vencimiento</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for producto in productos %}
+                <tr>
+                    <td>{{ producto.id }}</td>
+                    <td>{{ producto.nombre }}</td>
+                    <td>{{ producto.cantidad }}</td>
+                    <td>{{ producto.precio }}</td>
+                    <td>{{ producto.categoria }}</td>
+                    <td>{{ producto.fecha_vencimiento }}</td>  <!-- Nueva columna -->
+                    <td>
+                        <a href="{{ url_for('editar_producto', id=producto.id) }}">Editar</a>
+                        <a href="{{ url_for('eliminar_producto', id=producto.id) }}">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
